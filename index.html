@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>STRATOS | SAE Aerospace Club</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -16,14 +16,97 @@
     scroll-behavior:smooth;
 }
 
+html{ cursor:none; } /* 1. hide default cursor for custom cursor */
+
 body{
     background:#050816;
     color:white;
     font-family:'Poppins',sans-serif;
     overflow-x:hidden;
+    cursor:none;
 }
 
-/* STAR BACKGROUND */
+/* 2. SCROLL PROGRESS BAR */
+.scroll-progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:4px;
+    width:0%;
+    background:linear-gradient(90deg,#00e5ff,#ff00e5,#00e5ff);
+    background-size:200% 100%;
+    z-index:1100;
+    box-shadow:0 0 15px #00e5ff;
+    animation:gradientShift 3s linear infinite;
+}
+
+@keyframes gradientShift{
+    0%{background-position:0% 0;}
+    100%{background-position:200% 0;}
+}
+
+/* 3. CUSTOM CURSOR */
+.cursor-dot{
+    position:fixed;
+    width:8px;
+    height:8px;
+    background:#00e5ff;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9999;
+    transform:translate(-50%,-50%);
+    box-shadow:0 0 10px #00e5ff, 0 0 20px #00e5ff;
+    transition:width .2s, height .2s, background .2s;
+}
+
+/* 4. CUSTOM CURSOR RING */
+.cursor-ring{
+    position:fixed;
+    width:36px;
+    height:36px;
+    border:1px solid rgba(0,229,255,0.6);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9998;
+    transform:translate(-50%,-50%);
+    transition:width .3s, height .3s, border-color .3s, transform .15s ease-out;
+}
+
+.cursor-dot.hover{
+    width:14px;
+    height:14px;
+    background:#ff00e5;
+    box-shadow:0 0 15px #ff00e5, 0 0 30px #ff00e5;
+}
+
+.cursor-ring.hover{
+    width:60px;
+    height:60px;
+    border-color:#ff00e5;
+}
+
+/* 5. MOUSE TRAIL PARTICLES */
+.trail-dot{
+    position:fixed;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#00e5ff;
+    pointer-events:none;
+    z-index:9997;
+    opacity:0.7;
+    transform:translate(-50%,-50%);
+    animation:trailFade 0.6s forwards;
+}
+
+@keyframes trailFade{
+    to{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(0.2);
+    }
+}
+
+/* 6. ANIMATED STAR BACKGROUND (twinkle + drift) */
 
 .stars{
     position:fixed;
@@ -31,13 +114,87 @@ body{
     height:100%;
     top:0;
     left:0;
-    z-index:-1;
+    z-index:-2;
     background:
     radial-gradient(white 1px, transparent 1px),
     radial-gradient(white 1px, transparent 1px);
     background-size:50px 50px;
     background-position:0 0, 25px 25px;
     opacity:0.15;
+    animation:starDrift 120s linear infinite;
+}
+
+.stars2{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-1;
+    background:
+    radial-gradient(#00e5ff 1px, transparent 1px),
+    radial-gradient(#ff00e5 1px, transparent 1px);
+    background-size:120px 120px, 160px 160px;
+    background-position:10px 10px, 80px 60px;
+    opacity:0.12;
+    animation:starTwinkle 6s ease-in-out infinite alternate, starDrift2 200s linear infinite;
+}
+
+@keyframes starDrift{
+    from{ background-position:0 0, 25px 25px; }
+    to{ background-position:-1000px 500px, -975px 525px; }
+}
+
+@keyframes starDrift2{
+    from{ background-position:10px 10px, 80px 60px; }
+    to{ background-position:1000px -800px, 1080px -740px; }
+}
+
+@keyframes starTwinkle{
+    0%{ opacity:0.05; }
+    100%{ opacity:0.2; }
+}
+
+/* 7. NEBULA GLOW BLOBS */
+.nebula{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(120px);
+    z-index:-1;
+    pointer-events:none;
+    opacity:0.35;
+}
+
+.nebula1{
+    width:500px;
+    height:500px;
+    background:#00e5ff;
+    top:-150px;
+    left:-150px;
+    animation:floatBlob 18s ease-in-out infinite;
+}
+
+.nebula2{
+    width:600px;
+    height:600px;
+    background:#ff00e5;
+    bottom:-200px;
+    right:-200px;
+    animation:floatBlob 22s ease-in-out infinite reverse;
+}
+
+.nebula3{
+    width:400px;
+    height:400px;
+    background:#7000ff;
+    top:50%;
+    left:50%;
+    animation:floatBlob 26s ease-in-out infinite;
+}
+
+@keyframes floatBlob{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(80px,-60px) scale(1.2); }
 }
 
 /* NAVBAR */
@@ -58,6 +215,15 @@ nav{
     backdrop-filter:blur(15px);
     border:1px solid rgba(255,255,255,0.1);
     border-radius:20px;
+
+    transition:background .4s, box-shadow .4s, border-color .4s; /* 8. navbar scroll transition */
+}
+
+/* 8. NAVBAR SCROLLED STATE */
+nav.scrolled{
+    background:rgba(5,8,22,0.7);
+    box-shadow:0 5px 30px rgba(0,229,255,0.15);
+    border-color:rgba(0,229,255,0.3);
 }
 
 .logo{
@@ -65,6 +231,15 @@ nav{
     font-family:'Orbitron',sans-serif;
     font-weight:700;
     color:#00e5ff;
+    letter-spacing:2px;
+    position:relative;
+    /* 9. logo glow pulse */
+    animation:logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse{
+    0%,100%{ text-shadow:0 0 8px #00e5ff66; }
+    50%{ text-shadow:0 0 20px #00e5ffcc, 0 0 35px #ff00e555; }
 }
 
 .nav-links{
@@ -72,9 +247,33 @@ nav{
     gap:25px;
 }
 
+/* 10. NAV LINK UNDERLINE GROW */
 .nav-links a{
     color:white;
     text-decoration:none;
+    position:relative;
+    padding-bottom:6px;
+    transition:color .3s;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:0%;
+    height:2px;
+    background:linear-gradient(90deg,#00e5ff,#ff00e5);
+    transition:width .35s ease;
+    box-shadow:0 0 8px #00e5ff;
+}
+
+.nav-links a:hover{
+    color:#00e5ff;
+}
+
+.nav-links a:hover::after{
+    width:100%;
 }
 
 .auth{
@@ -82,12 +281,36 @@ nav{
     gap:10px;
 }
 
+/* 11. BUTTON BASE WITH RIPPLE-READY OVERFLOW + TRANSITION */
 .btn{
     padding:10px 18px;
     border:none;
     border-radius:50px;
-    cursor:pointer;
-    transition:0.3s;
+    cursor:none;
+    transition:transform .3s, box-shadow .3s, background .3s, color .3s;
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+    font-weight:500;
+    letter-spacing:0.5px;
+}
+
+/* 12. RIPPLE SPAN (added via JS on click) */
+.ripple{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,0.5);
+    transform:scale(0);
+    animation:rippleAnim .6s ease-out forwards;
+    pointer-events:none;
+    z-index:0;
+}
+
+@keyframes rippleAnim{
+    to{
+        transform:scale(4);
+        opacity:0;
+    }
 }
 
 .login{
@@ -96,13 +319,27 @@ nav{
     color:#00e5ff;
 }
 
+.login:hover{
+    background:#00e5ff;
+    color:black;
+    box-shadow:0 0 20px #00e5ff;
+}
+
 .signup{
     background:#00e5ff;
     color:black;
 }
 
+.signup:hover{
+    box-shadow:0 0 25px #00e5ff, 0 0 50px #00e5ff77;
+}
+
 .btn:hover{
     transform:translateY(-3px);
+}
+
+.btn:active{
+    transform:translateY(-1px) scale(0.97); /* 13. press feedback */
 }
 
 /* HERO */
@@ -114,30 +351,56 @@ nav{
     align-items:center;
     text-align:center;
     flex-direction:column;
+    position:relative;
 }
 
+/* 14. HERO TITLE GRADIENT + GLITCH SHEEN */
 .hero h1{
     font-size:6rem;
     font-family:'Orbitron',sans-serif;
-    color:#00e5ff;
+    font-weight:900;
+    background:linear-gradient(120deg,#00e5ff 0%, #ffffff 25%, #ff00e5 50%, #00e5ff 75%, #ffffff 100%);
+    background-size:300% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:shineText 6s linear infinite, heroIn 1s ease-out;
+    letter-spacing:8px;
+}
+
+@keyframes shineText{
+    0%{ background-position:0% 50%; }
+    100%{ background-position:300% 50%; }
+}
+
+/* 15. HERO ENTRANCE ANIMATION */
+@keyframes heroIn{
+    from{ opacity:0; transform:translateY(40px) scale(0.95); letter-spacing:20px; }
+    to{ opacity:1; transform:translateY(0) scale(1); letter-spacing:8px; }
 }
 
 .hero h2{
     margin-top:20px;
     font-size:2rem;
     color:#bdbdbd;
+    animation:heroIn 1s ease-out 0.2s both; /* 16. staggered fade-in */
+    opacity:0;
 }
 
 .hero p{
     margin-top:15px;
     max-width:700px;
     color:#888;
+    animation:heroIn 1s ease-out 0.4s both;
+    opacity:0;
 }
 
 .hero-buttons{
     margin-top:40px;
     display:flex;
     gap:20px;
+    animation:heroIn 1s ease-out 0.6s both;
+    opacity:0;
 }
 
 .primary{
@@ -145,10 +408,52 @@ nav{
     color:black;
 }
 
+.primary:hover{
+    box-shadow:0 0 25px #00e5ff, 0 0 60px #00e5ff55;
+}
+
 .secondary{
     border:1px solid white;
     background:transparent;
     color:white;
+}
+
+.secondary:hover{
+    background:white;
+    color:black;
+    box-shadow:0 0 20px #ffffff88;
+}
+
+/* 17. SCROLL-DOWN INDICATOR */
+.scroll-indicator{
+    position:absolute;
+    bottom:40px;
+    left:50%;
+    transform:translateX(-50%);
+    width:26px;
+    height:42px;
+    border:2px solid #00e5ff;
+    border-radius:20px;
+    box-shadow:0 0 12px #00e5ff55;
+}
+
+.scroll-indicator::before{
+    content:'';
+    position:absolute;
+    top:8px;
+    left:50%;
+    width:4px;
+    height:8px;
+    background:#00e5ff;
+    border-radius:2px;
+    transform:translateX(-50%);
+    animation:scrollDot 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollDot{
+    0%{ top:8px; opacity:1; }
+    60%{ top:22px; opacity:0; }
+    100%{ top:8px; opacity:0; }
 }
 
 /* SECTION */
@@ -162,6 +467,33 @@ section{
     font-size:3rem;
     margin-bottom:50px;
     font-family:'Orbitron',sans-serif;
+    position:relative;
+    display:inline-block;
+    width:100%;
+}
+
+/* 18. SECTION TITLE UNDERLINE ACCENT */
+.section-title::after{
+    content:'';
+    display:block;
+    width:80px;
+    height:4px;
+    margin:18px auto 0;
+    background:linear-gradient(90deg,#00e5ff,#ff00e5);
+    border-radius:10px;
+    box-shadow:0 0 12px #00e5ff;
+}
+
+/* 19. SCROLL REVEAL BASE CLASS */
+.reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition:opacity .8s ease, transform .8s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* ABOUT */
@@ -173,11 +505,27 @@ section{
     align-items:center;
 }
 
+/* 20. ABOUT CARD HOVER GLOW + BORDER ANIMATION */
 .about-card{
     background:rgba(255,255,255,0.05);
     padding:30px;
     border-radius:20px;
     backdrop-filter:blur(15px);
+    border:1px solid transparent;
+    transition:border-color .4s, transform .4s, box-shadow .4s;
+}
+
+.about-card:hover{
+    border-color:#00e5ff55;
+    transform:translateY(-6px);
+    box-shadow:0 10px 40px rgba(0,229,255,0.15);
+}
+
+.about-card h2{
+    color:#00e5ff;
+    margin-bottom:12px;
+    font-family:'Orbitron',sans-serif;
+    font-size:1.3rem;
 }
 
 /* TEAM */
@@ -188,20 +536,74 @@ section{
     gap:30px;
 }
 
+/* 21. TEAM CARD with shimmer sweep + icon */
 .team-card{
-    padding:30px;
+    padding:40px 30px;
     border-radius:20px;
     text-align:center;
 
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.08);
 
     transition:0.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+/* 22. SHIMMER SWEEP ON HOVER */
+.team-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-75%;
+    width:50%;
+    height:100%;
+    background:linear-gradient(120deg, transparent, rgba(0,229,255,0.25), transparent);
+    transform:skewX(-20deg);
+    transition:left .7s ease;
+}
+
+.team-card:hover::before{
+    left:125%;
 }
 
 .team-card:hover{
     transform:translateY(-10px);
     box-shadow:0 0 25px #00e5ff55;
+    border-color:#00e5ff66;
+}
+
+/* 23. TEAM CARD ICON CIRCLE */
+.team-icon{
+    width:60px;
+    height:60px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.6rem;
+    background:linear-gradient(135deg,#00e5ff33,#ff00e533);
+    border:1px solid #00e5ff55;
+    transition:transform .5s ease, background .5s ease;
+}
+
+.team-card:hover .team-icon{
+    transform:rotate(360deg) scale(1.1);
+    background:linear-gradient(135deg,#00e5ff66,#ff00e566);
+}
+
+.team-card h2{
+    font-family:'Orbitron',sans-serif;
+    font-size:1.2rem;
+    letter-spacing:1px;
+}
+
+.team-card p.team-desc{
+    margin-top:10px;
+    color:#999;
+    font-size:0.9rem;
 }
 
 /* TIMELINE */
@@ -209,14 +611,61 @@ section{
 .timeline{
     border-left:3px solid #00e5ff;
     padding-left:40px;
+    position:relative;
+}
+
+/* 24. TIMELINE GLOWING TRAVELING LINE */
+.timeline::before{
+    content:'';
+    position:absolute;
+    left:-3px;
+    top:0;
+    width:3px;
+    height:100%;
+    background:linear-gradient(180deg, transparent, #00e5ff, transparent);
+    background-size:100% 200%;
+    animation:timelineGlow 4s linear infinite;
+}
+
+@keyframes timelineGlow{
+    0%{ background-position:0 0%; }
+    100%{ background-position:0 200%; }
 }
 
 .timeline-item{
     margin-bottom:50px;
+    position:relative;
+    transition:transform .4s ease;
+}
+
+/* 25. TIMELINE NODE DOT with pulse */
+.timeline-item::before{
+    content:'';
+    position:absolute;
+    left:-49px;
+    top:4px;
+    width:14px;
+    height:14px;
+    background:#00e5ff;
+    border-radius:50%;
+    box-shadow:0 0 0 0 rgba(0,229,255,0.6);
+    animation:nodePulse 2.5s infinite;
+}
+
+@keyframes nodePulse{
+    0%{ box-shadow:0 0 0 0 rgba(0,229,255,0.6); }
+    70%{ box-shadow:0 0 0 12px rgba(0,229,255,0); }
+    100%{ box-shadow:0 0 0 0 rgba(0,229,255,0); }
+}
+
+.timeline-item:hover{
+    transform:translateX(10px);
 }
 
 .timeline-item h3{
     color:#00e5ff;
+    font-family:'Orbitron',sans-serif;
+    letter-spacing:1px;
 }
 
 /* STATS */
@@ -227,16 +676,27 @@ section{
     gap:30px;
 }
 
+/* 26. STAT CARD hover lift + count styling */
 .stat{
     text-align:center;
     padding:30px;
     border-radius:20px;
     background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.06);
+    transition:transform .4s, box-shadow .4s, border-color .4s;
+}
+
+.stat:hover{
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:0 10px 35px rgba(0,229,255,0.2);
+    border-color:#00e5ff44;
 }
 
 .stat h1{
     color:#00e5ff;
     font-size:3rem;
+    font-family:'Orbitron',sans-serif;
+    text-shadow:0 0 15px #00e5ff55;
 }
 
 /* GALLERY */
@@ -247,14 +707,43 @@ section{
     gap:20px;
 }
 
-.gallery img{
-    width:100%;
+/* 27. GALLERY ITEM with overlay caption */
+.gallery-item{
+    position:relative;
     border-radius:15px;
-    transition:0.4s;
+    overflow:hidden;
+    cursor:none;
 }
 
-.gallery img:hover{
-    transform:scale(1.05);
+.gallery-item img{
+    width:100%;
+    display:block;
+    border-radius:15px;
+    transition:transform .6s ease, filter .6s ease;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.1);
+    filter:brightness(0.7) saturate(1.3);
+}
+
+/* 28. GALLERY OVERLAY CAPTION SLIDE-UP */
+.gallery-overlay{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    padding:18px;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
+    transform:translateY(100%);
+    transition:transform .4s ease;
+    font-family:'Orbitron',sans-serif;
+    letter-spacing:1px;
+    color:#00e5ff;
+}
+
+.gallery-item:hover .gallery-overlay{
+    transform:translateY(0);
 }
 
 /* CONTACT */
@@ -264,15 +753,26 @@ section{
     margin:auto;
 }
 
+/* 29. INPUT FOCUS GLOW + FLOATING LABEL FEEL */
 .contact-form input,
 .contact-form textarea{
     width:100%;
     padding:15px;
-    margin-bottom:15px;
-    border:none;
+    margin-bottom:18px;
+    border:1px solid rgba(255,255,255,0.1);
     border-radius:10px;
     background:#111827;
     color:white;
+    transition:border-color .3s, box-shadow .3s, transform .3s;
+    font-family:'Poppins',sans-serif;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+    outline:none;
+    border-color:#00e5ff;
+    box-shadow:0 0 15px rgba(0,229,255,0.4);
+    transform:translateY(-2px);
 }
 
 .contact-form button{
@@ -285,9 +785,25 @@ footer{
     text-align:center;
     padding:40px;
     color:#777;
+    position:relative;
+}
+
+/* 30. FOOTER TOP GLOW LINE */
+footer::before{
+    content:'';
+    display:block;
+    width:60%;
+    max-width:400px;
+    height:1px;
+    margin:0 auto 25px;
+    background:linear-gradient(90deg, transparent, #00e5ff, transparent);
+    box-shadow:0 0 10px #00e5ff;
 }
 
 @media(max-width:900px){
+
+    html, body{ cursor:auto; }
+    .cursor-dot, .cursor-ring, .trail-dot{ display:none; }
 
     .about{
         grid-template-columns:1fr;
@@ -295,6 +811,7 @@ footer{
 
     .hero h1{
         font-size:3rem;
+        letter-spacing:4px;
     }
 
     nav{
@@ -308,9 +825,18 @@ footer{
 
 <body>
 
-<div class="stars"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
 
-<nav>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="nebula nebula1"></div>
+<div class="nebula nebula2"></div>
+<div class="nebula nebula3"></div>
+
+<nav id="navbar">
     <div class="logo">STRATOS</div>
 
     <div class="nav-links">
@@ -343,14 +869,16 @@ footer{
         <button class="btn secondary">Join Team</button>
     </div>
 
+    <div class="scroll-indicator"></div>
+
 </section>
 
 <section id="about">
 
-    <h1 class="section-title">About Us</h1>
+    <h1 class="section-title reveal">About Us</h1>
 
     <div class="about">
-        <div class="about-card">
+        <div class="about-card reveal">
             <h2>Who We Are</h2>
             <p>
                 Stratos is the aerospace division under SAE,
@@ -359,7 +887,7 @@ footer{
             </p>
         </div>
 
-        <div class="about-card">
+        <div class="about-card reveal">
             <h2>Mission</h2>
             <p>
                 To inspire students through hands-on aerospace
@@ -373,32 +901,44 @@ footer{
 
 <section id="team">
 
-    <h1 class="section-title">Our Divisions</h1>
+    <h1 class="section-title reveal">Our Divisions</h1>
 
     <div class="team-grid">
 
-        <div class="team-card">
+        <div class="team-card reveal">
+            <div class="team-icon">🌀</div>
             <h2>Aerodynamics</h2>
+            <p class="team-desc">Airflow, drag and stability analysis.</p>
         </div>
 
-        <div class="team-card">
+        <div class="team-card reveal">
+            <div class="team-icon">🏗️</div>
             <h2>Structures</h2>
+            <p class="team-desc">Airframe design and load testing.</p>
         </div>
 
-        <div class="team-card">
+        <div class="team-card reveal">
+            <div class="team-icon">🔥</div>
             <h2>Propulsion</h2>
+            <p class="team-desc">Motor selection and thrust systems.</p>
         </div>
 
-        <div class="team-card">
+        <div class="team-card reveal">
+            <div class="team-icon">📡</div>
             <h2>Avionics</h2>
+            <p class="team-desc">Sensors, telemetry and control logic.</p>
         </div>
 
-        <div class="team-card">
+        <div class="team-card reveal">
+            <div class="team-icon">🪂</div>
             <h2>Recovery</h2>
+            <p class="team-desc">Parachute systems and safe descent.</p>
         </div>
 
-        <div class="team-card">
+        <div class="team-card reveal">
+            <div class="team-icon">📋</div>
             <h2>Management</h2>
+            <p class="team-desc">Planning, logistics and outreach.</p>
         </div>
 
     </div>
@@ -407,31 +947,31 @@ footer{
 
 <section id="timeline">
 
-    <h1 class="section-title">Rocket Journey</h1>
+    <h1 class="section-title reveal">Rocket Journey</h1>
 
     <div class="timeline">
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
             <h3>Concept</h3>
             <p>Initial mission planning.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
             <h3>Design</h3>
             <p>CAD and simulation phase.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
             <h3>Manufacturing</h3>
             <p>Fabrication and assembly.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
             <h3>Testing</h3>
             <p>Ground and flight testing.</p>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item reveal">
             <h3>Launch</h3>
             <p>Mission execution.</p>
         </div>
@@ -442,26 +982,26 @@ footer{
 
 <section>
 
-    <h1 class="section-title">Achievements</h1>
+    <h1 class="section-title reveal">Achievements</h1>
 
     <div class="stats">
 
-        <div class="stat">
+        <div class="stat reveal">
             <h1>20+</h1>
             <p>Members</p>
         </div>
 
-        <div class="stat">
+        <div class="stat reveal">
             <h1>5+</h1>
             <p>Projects</p>
         </div>
 
-        <div class="stat">
+        <div class="stat reveal">
             <h1>100+</h1>
             <p>Testing Hours</p>
         </div>
 
-        <div class="stat">
+        <div class="stat reveal">
             <h1>3+</h1>
             <p>Competitions</p>
         </div>
@@ -472,14 +1012,29 @@ footer{
 
 <section id="gallery">
 
-    <h1 class="section-title">Gallery</h1>
+    <h1 class="section-title reveal">Gallery</h1>
 
     <div class="gallery">
 
-        <img src="https://picsum.photos/500/300?1">
-        <img src="https://picsum.photos/500/300?2">
-        <img src="https://picsum.photos/500/300?3">
-        <img src="https://picsum.photos/500/300?4">
+        <div class="gallery-item reveal">
+            <img src="https://picsum.photos/500/300?1">
+            <div class="gallery-overlay">Static Engine Fire Test</div>
+        </div>
+
+        <div class="gallery-item reveal">
+            <img src="https://picsum.photos/500/300?2">
+            <div class="gallery-overlay">Airframe Assembly</div>
+        </div>
+
+        <div class="gallery-item reveal">
+            <img src="https://picsum.photos/500/300?3">
+            <div class="gallery-overlay">Avionics Bay</div>
+        </div>
+
+        <div class="gallery-item reveal">
+            <img src="https://picsum.photos/500/300?4">
+            <div class="gallery-overlay">Launch Day</div>
+        </div>
 
     </div>
 
@@ -487,9 +1042,9 @@ footer{
 
 <section id="contact">
 
-    <h1 class="section-title">Join Stratos</h1>
+    <h1 class="section-title reveal">Join Stratos</h1>
 
-    <form class="contact-form">
+    <form class="contact-form reveal">
 
         <input type="text" placeholder="Name">
 
@@ -499,7 +1054,7 @@ footer{
 
         <textarea rows="5" placeholder="Why do you want to join?"></textarea>
 
-        <button class="btn signup">
+        <button class="btn signup" type="submit">
             Ignite My Journey
         </button>
 
@@ -510,6 +1065,98 @@ footer{
 <footer>
     © 2026 STRATOS SAE Aerospace Club
 </footer>
+
+<script>
+
+/* ===== CUSTOM CURSOR + TRAIL ===== */
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', (e)=>{
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
+
+    // create trail dot
+    const trail = document.createElement('div');
+    trail.className = 'trail-dot';
+    trail.style.left = mouseX + 'px';
+    trail.style.top = mouseY + 'px';
+    document.body.appendChild(trail);
+    setTimeout(()=> trail.remove(), 600);
+});
+
+function animateRing(){
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+}
+animateRing();
+
+// hover state on interactive elements
+document.querySelectorAll('a, button, .gallery-item, .team-card, input, textarea').forEach(el=>{
+    el.addEventListener('mouseenter', ()=>{
+        dot.classList.add('hover');
+        ring.classList.add('hover');
+    });
+    el.addEventListener('mouseleave', ()=>{
+        dot.classList.remove('hover');
+        ring.classList.remove('hover');
+    });
+});
+
+/* ===== SCROLL PROGRESS BAR ===== */
+const progress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', ()=>{
+    const scrollTop = document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progress.style.width = (scrollTop / docHeight * 100) + '%';
+});
+
+/* ===== NAVBAR SCROLLED STATE ===== */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', ()=>{
+    if(window.scrollY > 50){
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+
+/* ===== SCROLL REVEAL ===== */
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('active');
+        }
+    });
+}, { threshold: 0.15 });
+
+reveals.forEach(el=> observer.observe(el));
+
+/* ===== BUTTON RIPPLE EFFECT ===== */
+document.querySelectorAll('.btn').forEach(btn=>{
+    btn.addEventListener('click', function(e){
+        const circle = document.createElement('span');
+        circle.classList.add('ripple');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        circle.style.width = circle.style.height = size + 'px';
+        circle.style.left = (e.clientX - rect.left - size/2) + 'px';
+        circle.style.top = (e.clientY - rect.top - size/2) + 'px';
+        this.appendChild(circle);
+        setTimeout(()=> circle.remove(), 600);
+    });
+});
+
+</script>
 
 </body>
 </html>
