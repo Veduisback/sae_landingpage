@@ -19,8 +19,8 @@
 html{ cursor:none; } /* 1. hide default cursor for custom cursor */
 
 body{
-    background:#050816;
-    color:white;
+    background:#ffffff;
+    color:#1a1a1a;
     font-family:'Poppins',sans-serif;
     overflow-x:hidden;
     cursor:none;
@@ -33,10 +33,10 @@ body{
     left:0;
     height:4px;
     width:0%;
-    background:linear-gradient(90deg,#00e5ff,#ff00e5,#00e5ff);
+    background:linear-gradient(90deg,#e10600,#ff4d4d,#e10600);
     background-size:200% 100%;
     z-index:1100;
-    box-shadow:0 0 15px #00e5ff;
+    box-shadow:0 0 15px #e10600;
     animation:gradientShift 3s linear infinite;
 }
 
@@ -50,12 +50,12 @@ body{
     position:fixed;
     width:8px;
     height:8px;
-    background:#00e5ff;
+    background:#e10600;
     border-radius:50%;
     pointer-events:none;
     z-index:9999;
     transform:translate(-50%,-50%);
-    box-shadow:0 0 10px #00e5ff, 0 0 20px #00e5ff;
+    box-shadow:0 0 10px #e10600, 0 0 20px #e10600;
     transition:width .2s, height .2s, background .2s;
 }
 
@@ -75,14 +75,14 @@ body{
 .cursor-dot.hover{
     width:14px;
     height:14px;
-    background:#ff00e5;
-    box-shadow:0 0 15px #ff00e5, 0 0 30px #ff00e5;
+    background:#ff4d4d;
+    box-shadow:0 0 15px #ff4d4d, 0 0 30px #ff4d4d;
 }
 
 .cursor-ring.hover{
     width:60px;
     height:60px;
-    border-color:#ff00e5;
+    border-color:#ff4d4d;
 }
 
 /* 5. MOUSE TRAIL PARTICLES */
@@ -91,7 +91,7 @@ body{
     width:6px;
     height:6px;
     border-radius:50%;
-    background:#00e5ff;
+    background:#e10600;
     pointer-events:none;
     z-index:9997;
     opacity:0.7;
@@ -116,8 +116,8 @@ body{
     left:0;
     z-index:-2;
     background:
-    radial-gradient(white 1px, transparent 1px),
-    radial-gradient(white 1px, transparent 1px);
+    radial-gradient(#e10600 1px, transparent 1px),
+    radial-gradient(#e10600 1px, transparent 1px);
     background-size:50px 50px;
     background-position:0 0, 25px 25px;
     opacity:0.15;
@@ -132,8 +132,8 @@ body{
     left:0;
     z-index:-1;
     background:
-    radial-gradient(#00e5ff 1px, transparent 1px),
-    radial-gradient(#ff00e5 1px, transparent 1px);
+    radial-gradient(#e10600 1px, transparent 1px),
+    radial-gradient(#ff4d4d 1px, transparent 1px);
     background-size:120px 120px, 160px 160px;
     background-position:10px 10px, 80px 60px;
     opacity:0.12;
@@ -168,7 +168,7 @@ body{
 .nebula1{
     width:500px;
     height:500px;
-    background:#00e5ff;
+    background:#e10600;
     top:-150px;
     left:-150px;
     animation:floatBlob 18s ease-in-out infinite;
@@ -177,7 +177,7 @@ body{
 .nebula2{
     width:600px;
     height:600px;
-    background:#ff00e5;
+    background:#ff4d4d;
     bottom:-200px;
     right:-200px;
     animation:floatBlob 22s ease-in-out infinite reverse;
@@ -186,7 +186,7 @@ body{
 .nebula3{
     width:400px;
     height:400px;
-    background:#7000ff;
+    background:#990000;
     top:50%;
     left:50%;
     animation:floatBlob 26s ease-in-out infinite;
@@ -211,9 +211,9 @@ nav{
 
     padding:15px 30px;
 
-    background:rgba(255,255,255,0.05);
+    background:rgba(225,6,0,0.05);
     backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,0.1);
+    border:1px solid rgba(225,6,0,0.15);
     border-radius:20px;
 
     transition:background .4s, box-shadow .4s, border-color .4s; /* 8. navbar scroll transition */
@@ -230,7 +230,7 @@ nav.scrolled{
     font-size:1.6rem;
     font-family:'Orbitron',sans-serif;
     font-weight:700;
-    color:#00e5ff;
+    color:#e10600;
     letter-spacing:2px;
     position:relative;
     /* 9. logo glow pulse */
@@ -238,8 +238,8 @@ nav.scrolled{
 }
 
 @keyframes logoPulse{
-    0%,100%{ text-shadow:0 0 8px #00e5ff66; }
-    50%{ text-shadow:0 0 20px #00e5ffcc, 0 0 35px #ff00e555; }
+    0%,100%{ text-shadow:0 0 8px #e1060066; }
+    50%{ text-shadow:0 0 20px #e10600cc, 0 0 35px #ff4d4d55; }
 }
 
 .nav-links{
@@ -249,7 +249,7 @@ nav.scrolled{
 
 /* 10. NAV LINK UNDERLINE GROW */
 .nav-links a{
-    color:white;
+    color:#1a1a1a;
     text-decoration:none;
     position:relative;
     padding-bottom:6px;
@@ -263,13 +263,13 @@ nav.scrolled{
     bottom:0;
     width:0%;
     height:2px;
-    background:linear-gradient(90deg,#00e5ff,#ff00e5);
+    background:linear-gradient(90deg,#e10600,#ff4d4d);
     transition:width .35s ease;
-    box-shadow:0 0 8px #00e5ff;
+    box-shadow:0 0 8px #e10600;
 }
 
 .nav-links a:hover{
-    color:#00e5ff;
+    color:#e10600;
 }
 
 .nav-links a:hover::after{
@@ -299,7 +299,7 @@ nav.scrolled{
 .ripple{
     position:absolute;
     border-radius:50%;
-    background:rgba(255,255,255,0.5);
+    background:rgba(225,6,0,0.4);
     transform:scale(0);
     animation:rippleAnim .6s ease-out forwards;
     pointer-events:none;
@@ -315,23 +315,23 @@ nav.scrolled{
 
 .login{
     background:transparent;
-    border:1px solid #00e5ff;
-    color:#00e5ff;
+    border:1px solid #e10600;
+    color:#e10600;
 }
 
 .login:hover{
-    background:#00e5ff;
-    color:black;
-    box-shadow:0 0 20px #00e5ff;
+    background:#e10600;
+    color:#ffffff;
+    box-shadow:0 0 20px #e10600;
 }
 
 .signup{
-    background:#00e5ff;
-    color:black;
+    background:#e10600;
+    color:#ffffff;
 }
 
 .signup:hover{
-    box-shadow:0 0 25px #00e5ff, 0 0 50px #00e5ff77;
+    box-shadow:0 0 25px #e10600, 0 0 50px #e1060077;
 }
 
 .btn:hover{
@@ -359,7 +359,7 @@ nav.scrolled{
     font-size:6rem;
     font-family:'Orbitron',sans-serif;
     font-weight:900;
-    background:linear-gradient(120deg,#00e5ff 0%, #ffffff 25%, #ff00e5 50%, #00e5ff 75%, #ffffff 100%);
+    background:linear-gradient(120deg,#e10600 0%, #ffffff 25%, #ff4d4d 50%, #e10600 75%, #ffffff 100%);
     background-size:300% auto;
     -webkit-background-clip:text;
     background-clip:text;
@@ -382,7 +382,7 @@ nav.scrolled{
 .hero h2{
     margin-top:20px;
     font-size:2rem;
-    color:#bdbdbd;
+    color:#444;
     animation:heroIn 1s ease-out 0.2s both; /* 16. staggered fade-in */
     opacity:0;
 }
@@ -390,7 +390,7 @@ nav.scrolled{
 .hero p{
     margin-top:15px;
     max-width:700px;
-    color:#888;
+    color:#666;
     animation:heroIn 1s ease-out 0.4s both;
     opacity:0;
 }
@@ -404,24 +404,24 @@ nav.scrolled{
 }
 
 .primary{
-    background:#00e5ff;
-    color:black;
+    background:#e10600;
+    color:#ffffff;
 }
 
 .primary:hover{
-    box-shadow:0 0 25px #00e5ff, 0 0 60px #00e5ff55;
+    box-shadow:0 0 25px #e10600, 0 0 60px #e1060055;
 }
 
 .secondary{
-    border:1px solid white;
+    border:1px solid #1a1a1a;
     background:transparent;
-    color:white;
+    color:#1a1a1a;
 }
 
 .secondary:hover{
-    background:white;
-    color:black;
-    box-shadow:0 0 20px #ffffff88;
+    background:#1a1a1a;
+    color:#ffffff;
+    box-shadow:0 0 20px #1a1a1a55;
 }
 
 /* 17. SCROLL-DOWN INDICATOR */
@@ -432,9 +432,9 @@ nav.scrolled{
     transform:translateX(-50%);
     width:26px;
     height:42px;
-    border:2px solid #00e5ff;
+    border:2px solid #e10600;
     border-radius:20px;
-    box-shadow:0 0 12px #00e5ff55;
+    box-shadow:0 0 12px #e1060055;
 }
 
 .scroll-indicator::before{
@@ -444,7 +444,7 @@ nav.scrolled{
     left:50%;
     width:4px;
     height:8px;
-    background:#00e5ff;
+    background:#e10600;
     border-radius:2px;
     transform:translateX(-50%);
     animation:scrollDot 1.6s ease-in-out infinite;
@@ -479,9 +479,9 @@ section{
     width:80px;
     height:4px;
     margin:18px auto 0;
-    background:linear-gradient(90deg,#00e5ff,#ff00e5);
+    background:linear-gradient(90deg,#e10600,#ff4d4d);
     border-radius:10px;
-    box-shadow:0 0 12px #00e5ff;
+    box-shadow:0 0 12px #e10600;
 }
 
 /* 19. SCROLL REVEAL BASE CLASS */
@@ -507,7 +507,7 @@ section{
 
 /* 20. ABOUT CARD HOVER GLOW + BORDER ANIMATION */
 .about-card{
-    background:rgba(255,255,255,0.05);
+    background:rgba(225,6,0,0.05);
     padding:30px;
     border-radius:20px;
     backdrop-filter:blur(15px);
@@ -516,13 +516,13 @@ section{
 }
 
 .about-card:hover{
-    border-color:#00e5ff55;
+    border-color:#e1060055;
     transform:translateY(-6px);
     box-shadow:0 10px 40px rgba(0,229,255,0.15);
 }
 
 .about-card h2{
-    color:#00e5ff;
+    color:#e10600;
     margin-bottom:12px;
     font-family:'Orbitron',sans-serif;
     font-size:1.3rem;
@@ -542,9 +542,9 @@ section{
     border-radius:20px;
     text-align:center;
 
-    background:rgba(255,255,255,0.05);
+    background:rgba(225,6,0,0.05);
     backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,0.08);
+    border:1px solid rgba(225,6,0,0.08);
 
     transition:0.4s;
     position:relative;
@@ -570,8 +570,8 @@ section{
 
 .team-card:hover{
     transform:translateY(-10px);
-    box-shadow:0 0 25px #00e5ff55;
-    border-color:#00e5ff66;
+    box-shadow:0 0 25px #e1060055;
+    border-color:#e1060066;
 }
 
 /* 23. TEAM CARD ICON CIRCLE */
@@ -584,14 +584,14 @@ section{
     align-items:center;
     justify-content:center;
     font-size:1.6rem;
-    background:linear-gradient(135deg,#00e5ff33,#ff00e533);
-    border:1px solid #00e5ff55;
+    background:linear-gradient(135deg,#e1060033,#ff4d4d33);
+    border:1px solid #e1060055;
     transition:transform .5s ease, background .5s ease;
 }
 
 .team-card:hover .team-icon{
     transform:rotate(360deg) scale(1.1);
-    background:linear-gradient(135deg,#00e5ff66,#ff00e566);
+    background:linear-gradient(135deg,#e1060066,#ff4d4d66);
 }
 
 .team-card h2{
@@ -602,14 +602,14 @@ section{
 
 .team-card p.team-desc{
     margin-top:10px;
-    color:#999;
+    color:#555;
     font-size:0.9rem;
 }
 
 /* TIMELINE */
 
 .timeline{
-    border-left:3px solid #00e5ff;
+    border-left:3px solid #e10600;
     padding-left:40px;
     position:relative;
 }
@@ -622,7 +622,7 @@ section{
     top:0;
     width:3px;
     height:100%;
-    background:linear-gradient(180deg, transparent, #00e5ff, transparent);
+    background:linear-gradient(180deg, transparent, #e10600, transparent);
     background-size:100% 200%;
     animation:timelineGlow 4s linear infinite;
 }
@@ -646,7 +646,7 @@ section{
     top:4px;
     width:14px;
     height:14px;
-    background:#00e5ff;
+    background:#e10600;
     border-radius:50%;
     box-shadow:0 0 0 0 rgba(0,229,255,0.6);
     animation:nodePulse 2.5s infinite;
@@ -663,7 +663,7 @@ section{
 }
 
 .timeline-item h3{
-    color:#00e5ff;
+    color:#e10600;
     font-family:'Orbitron',sans-serif;
     letter-spacing:1px;
 }
@@ -681,22 +681,22 @@ section{
     text-align:center;
     padding:30px;
     border-radius:20px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.06);
+    background:rgba(225,6,0,0.05);
+    border:1px solid rgba(225,6,0,0.06);
     transition:transform .4s, box-shadow .4s, border-color .4s;
 }
 
 .stat:hover{
     transform:translateY(-8px) scale(1.03);
     box-shadow:0 10px 35px rgba(0,229,255,0.2);
-    border-color:#00e5ff44;
+    border-color:#e1060044;
 }
 
 .stat h1{
-    color:#00e5ff;
+    color:#e10600;
     font-size:3rem;
     font-family:'Orbitron',sans-serif;
-    text-shadow:0 0 15px #00e5ff55;
+    text-shadow:0 0 15px #e1060055;
 }
 
 /* GALLERY */
@@ -739,7 +739,7 @@ section{
     transition:transform .4s ease;
     font-family:'Orbitron',sans-serif;
     letter-spacing:1px;
-    color:#00e5ff;
+    color:#e10600;
 }
 
 .gallery-item:hover .gallery-overlay{
@@ -759,10 +759,10 @@ section{
     width:100%;
     padding:15px;
     margin-bottom:18px;
-    border:1px solid rgba(255,255,255,0.1);
+    border:1px solid rgba(225,6,0,0.15);
     border-radius:10px;
-    background:#111827;
-    color:white;
+    background:#fdf0f0;
+    color:#1a1a1a;
     transition:border-color .3s, box-shadow .3s, transform .3s;
     font-family:'Poppins',sans-serif;
 }
@@ -770,8 +770,8 @@ section{
 .contact-form input:focus,
 .contact-form textarea:focus{
     outline:none;
-    border-color:#00e5ff;
-    box-shadow:0 0 15px rgba(0,229,255,0.4);
+    border-color:#e10600;
+    box-shadow:0 0 15px rgba(225,6,0,0.4);
     transform:translateY(-2px);
 }
 
@@ -784,7 +784,7 @@ section{
 footer{
     text-align:center;
     padding:40px;
-    color:#777;
+    color:#555;
     position:relative;
 }
 
@@ -796,8 +796,8 @@ footer::before{
     max-width:400px;
     height:1px;
     margin:0 auto 25px;
-    background:linear-gradient(90deg, transparent, #00e5ff, transparent);
-    box-shadow:0 0 10px #00e5ff;
+    background:linear-gradient(90deg, transparent, #e10600, transparent);
+    box-shadow:0 0 10px #e10600;
 }
 
 @media(max-width:900px){
