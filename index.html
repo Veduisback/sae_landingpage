@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STRATOS | SAE Aerospace Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050816;
+    color:white;
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+}
+
+/* STAR BACKGROUND */
+
+.stars{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-1;
+    background:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px);
+    background-size:50px 50px;
+    background-position:0 0, 25px 25px;
+    opacity:0.15;
+}
+
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    width:90%;
+    left:5%;
+    top:20px;
+    z-index:999;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:15px 30px;
+
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:20px;
+}
+
+.logo{
+    font-size:1.6rem;
+    font-family:'Orbitron',sans-serif;
+    font-weight:700;
+    color:#00e5ff;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+}
+
+.auth{
+    display:flex;
+    gap:10px;
+}
+
+.btn{
+    padding:10px 18px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.login{
+    background:transparent;
+    border:1px solid #00e5ff;
+    color:#00e5ff;
+}
+
+.signup{
+    background:#00e5ff;
+    color:black;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    flex-direction:column;
+}
+
+.hero h1{
+    font-size:6rem;
+    font-family:'Orbitron',sans-serif;
+    color:#00e5ff;
+}
+
+.hero h2{
+    margin-top:20px;
+    font-size:2rem;
+    color:#bdbdbd;
+}
+
+.hero p{
+    margin-top:15px;
+    max-width:700px;
+    color:#888;
+}
+
+.hero-buttons{
+    margin-top:40px;
+    display:flex;
+    gap:20px;
+}
+
+.primary{
+    background:#00e5ff;
+    color:black;
+}
+
+.secondary{
+    border:1px solid white;
+    background:transparent;
+    color:white;
+}
+
+/* SECTION */
+
+section{
+    padding:100px 10%;
+}
+
+.section-title{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:50px;
+    font-family:'Orbitron',sans-serif;
+}
+
+/* ABOUT */
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.about-card{
+    background:rgba(255,255,255,0.05);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(15px);
+}
+
+/* TEAM */
+
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.team-card{
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+
+    transition:0.4s;
+}
+
+.team-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 25px #00e5ff55;
+}
+
+/* TIMELINE */
+
+.timeline{
+    border-left:3px solid #00e5ff;
+    padding-left:40px;
+}
+
+.timeline-item{
+    margin-bottom:50px;
+}
+
+.timeline-item h3{
+    color:#00e5ff;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:30px;
+}
+
+.stat{
+    text-align:center;
+    padding:30px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.05);
+}
+
+.stat h1{
+    color:#00e5ff;
+    font-size:3rem;
+}
+
+/* GALLERY */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:15px;
+    transition:0.4s;
+}
+
+.gallery img:hover{
+    transform:scale(1.05);
+}
+
+/* CONTACT */
+
+.contact-form{
+    max-width:700px;
+    margin:auto;
+}
+
+.contact-form input,
+.contact-form textarea{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+    border:none;
+    border-radius:10px;
+    background:#111827;
+    color:white;
+}
+
+.contact-form button{
+    width:100%;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:40px;
+    color:#777;
+}
+
+@media(max-width:900px){
+
+    .about{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<nav>
+    <div class="logo">STRATOS</div>
+
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#team">Team</a>
+        <a href="#timeline">Projects</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div class="auth">
+        <button class="btn login">Login</button>
+        <button class="btn signup">Sign Up</button>
+    </div>
+</nav>
+
+<section class="hero">
+
+    <h1>STRATOS</h1>
+
+    <h2>Engineering Beyond Boundaries</h2>
+
+    <p>
+        SAE Aerospace Club dedicated to designing,
+        building and launching high-performance rockets.
+    </p>
+
+    <div class="hero-buttons">
+        <button class="btn primary">Explore Projects</button>
+        <button class="btn secondary">Join Team</button>
+    </div>
+
+</section>
+
+<section id="about">
+
+    <h1 class="section-title">About Us</h1>
+
+    <div class="about">
+        <div class="about-card">
+            <h2>Who We Are</h2>
+            <p>
+                Stratos is the aerospace division under SAE,
+                focused on innovation in rocket engineering,
+                avionics, propulsion and recovery systems.
+            </p>
+        </div>
+
+        <div class="about-card">
+            <h2>Mission</h2>
+            <p>
+                To inspire students through hands-on aerospace
+                engineering and participation in national and
+                international competitions.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+<section id="team">
+
+    <h1 class="section-title">Our Divisions</h1>
+
+    <div class="team-grid">
+
+        <div class="team-card">
+            <h2>Aerodynamics</h2>
+        </div>
+
+        <div class="team-card">
+            <h2>Structures</h2>
+        </div>
+
+        <div class="team-card">
+            <h2>Propulsion</h2>
+        </div>
+
+        <div class="team-card">
+            <h2>Avionics</h2>
+        </div>
+
+        <div class="team-card">
+            <h2>Recovery</h2>
+        </div>
+
+        <div class="team-card">
+            <h2>Management</h2>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="timeline">
+
+    <h1 class="section-title">Rocket Journey</h1>
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+            <h3>Concept</h3>
+            <p>Initial mission planning.</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Design</h3>
+            <p>CAD and simulation phase.</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Manufacturing</h3>
+            <p>Fabrication and assembly.</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Testing</h3>
+            <p>Ground and flight testing.</p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Launch</h3>
+            <p>Mission execution.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section>
+
+    <h1 class="section-title">Achievements</h1>
+
+    <div class="stats">
+
+        <div class="stat">
+            <h1>20+</h1>
+            <p>Members</p>
+        </div>
+
+        <div class="stat">
+            <h1>5+</h1>
+            <p>Projects</p>
+        </div>
+
+        <div class="stat">
+            <h1>100+</h1>
+            <p>Testing Hours</p>
+        </div>
+
+        <div class="stat">
+            <h1>3+</h1>
+            <p>Competitions</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="gallery">
+
+    <h1 class="section-title">Gallery</h1>
+
+    <div class="gallery">
+
+        <img src="https://picsum.photos/500/300?1">
+        <img src="https://picsum.photos/500/300?2">
+        <img src="https://picsum.photos/500/300?3">
+        <img src="https://picsum.photos/500/300?4">
+
+    </div>
+
+</section>
+
+<section id="contact">
+
+    <h1 class="section-title">Join Stratos</h1>
+
+    <form class="contact-form">
+
+        <input type="text" placeholder="Name">
+
+        <input type="email" placeholder="Email">
+
+        <input type="text" placeholder="Department">
+
+        <textarea rows="5" placeholder="Why do you want to join?"></textarea>
+
+        <button class="btn signup">
+            Ignite My Journey
+        </button>
+
+    </form>
+
+</section>
+
+<footer>
+    © 2026 STRATOS SAE Aerospace Club
+</footer>
+
+</body>
+</html>
